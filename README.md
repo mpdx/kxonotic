@@ -1,4 +1,4 @@
-# Spin Xonotic on Digital Ocean by Ansible 
+# Spin Xonotic Kappa Server on Digital Ocean using Ansible 
 
 ## System requirements 
 
