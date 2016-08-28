@@ -1,0 +1,22 @@
+---
+- name: installing fail2ban
+  action: apt pkg=fail2ban state=installed
+
+- name: disallowing password authentication
+  action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+  notify: restart ssh
+
+- name: installing packages
+  action: apt pkg=ufw state=installed
+
+- name: setting ufw 22/tcp
+  action: shell ufw allow 22/tcp
+
+- name: setting ufw 26000/udp
+  action: shell ufw allow 26000/udp
+
+- name: enabling ufw
+  action: shell echo 'y' | ufw enable
+
+- name: deleting root password
+  action: shell passwd -d root

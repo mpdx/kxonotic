@@ -1,0 +1,5 @@
+---
+  - include: packages.yml
+  - include: secure.yml
+  - include: xonotic.yml
+  # - include: notify.yml

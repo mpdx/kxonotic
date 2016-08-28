@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -z "$DO_API_TOKEN" ]; then
+    echo "DO_API_TOKEN enviorment variable is not set.. dang"
+    exit 1
+fi  
+
+case "$1" in
+   "") 
+      echo "Usage: $0 [init|destroy]"
+      exit 1
+      ;;
+   init)
+      ansible-playbook install.yml
+      ;;
+   destroy)
+      ansible-playbook destroy.yml
+      ;;
+esac
+

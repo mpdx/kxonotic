@@ -1,0 +1,40 @@
+---
+  - name: ensuring local ssh key exists
+    user: >
+      name={{ ssh_user }}
+      generate_ssh_key=yes
+      ssh_key_file={{ ssh_key }}
+
+  - name: registering ssh key 
+    digital_ocean: >
+      state=present
+      command=ssh
+      name=xonotic_key
+      ssh_pub_key="{{ ssh_key }}.pub"
+      api_token={{ api_token }}
+    register: ssh_key
+
+  - name: spinning off droplet
+    digital_ocean: >
+      state=present
+      command=droplet
+      name=xonotic-server
+      unique_name=yes
+      size_id=1gb
+      region_id=fra1
+      image_id=ubuntu-14-04-x64
+      ssh_key_ids={{ ssh_key.ssh_key.id }}
+      api_token={{ api_token }}
+    register: droplet
+    #notify
+
+  - debug: msg="IP is {{ droplet.droplet.ip_address }}"
+
+  - name: waiting until ssh is up
+    local_action: wait_for port=22 host={{ inventory_hostname }} search_regex=OpenSSH delay=10
+
+  - name: adding server to the inventory
+    add_host:
+      name: "{{ droplet.droplet.ip_address }}"
+      groups: remote
+    when: droplet.droplet is defined

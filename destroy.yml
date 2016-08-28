@@ -1,0 +1,7 @@
+---
+- name: destroying server
+  hosts: local
+  connection: local
+  gather_facts: false
+  roles:
+    - destroy

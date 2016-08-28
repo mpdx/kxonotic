@@ -1,0 +1,8 @@
+---
+- name: destroy machine
+  digital_ocean:
+    state=absent
+    command=droplet
+    name=xonotic-server
+    unique_name=yes
+    api_token={{ api_token }}

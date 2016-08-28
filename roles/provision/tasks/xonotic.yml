@@ -1,0 +1,15 @@
+---
+- name: downloading xonotic 
+  get_url: url=http://dl.xonotic.org/xonotic-0.8.1.zip dest=/tmp/xonotic.zip checksum=sha256:be8bcc41e2993a2f26d4d04c65a7eab810443bd98b11b45e482ffdbbf284c46f
+
+- name: installing xonotic
+  unarchive: src=/tmp/xonotic.zip dest=/opt remote_src=yes copy=no
+
+- name: setting xonotic server config
+  template: src=xonotic/server.cfg dest=/opt/Xonotic/data/server.cfg
+
+- name: installing daemon script for xonotic
+  template: src=upstart/xonotic.conf dest=/etc/init/xonotic.conf
+  notify: xontic daemon
+
+# roofbeta, the yard

@@ -1,0 +1,14 @@
+---
+- name: setting remote server
+  hosts: local
+  connection: local
+  gather_facts: false
+  roles:
+    - bootstrap
+
+- name: provisioning remote server
+  hosts: remote
+  remote_user: root
+  gather_facts: false
+  roles:
+    - provision
