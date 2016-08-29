@@ -1,1 +1,11 @@
-# slack/mail
+---
+- name: sending email after all has been set
+  local_action: mail
+                host={{ mail_host }}
+                port={{ mail_port }}
+                username={{ mail_user }}
+                password={{ mail_password }}
+                subject="Xonotic is up!"
+                body="Kappa Xonotic Server is up and running on * {{ xonotic_domain }} *" 
+                from="{{ mail_from }}"
+                to="{{ mail_to }}"

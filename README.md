@@ -39,7 +39,23 @@ git clone https://github.com/mpdx/kappa-xonotic
 You should have one, obviously. Generate it then set environmental variable like:
 
 ```
-export DO_API_TOKEN=YourIMPRESSIVEtokenHere
+export DO_API_TOKEN=tokenStringHere
+```
+
+also, change record for digital ocean dns in all.yml file:
+
+```
+sed -i 's/xonotic.example.com/your.custom.domain/' group_vars/all.yml
+```
+
+### Other settings  
+
+For email notifications just set:
+```
+export EMAIL_USERNAME=youremail@gmail.com
+export EMAIL_PASSWORD=yourpassword
+export EMAIL_FROM="Your Name"
+export EMAIL_TO="first.friend@example.org,second.friend@example.net"
 ```
 
 ### Usage

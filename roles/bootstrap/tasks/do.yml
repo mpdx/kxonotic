@@ -26,7 +26,6 @@
       ssh_key_ids={{ ssh_key.ssh_key.id }}
       api_token={{ api_token }}
     register: droplet
-    #notify
 
   - name: registering dns
     digital_ocean_domain: >
@@ -38,7 +37,7 @@
   - debug: msg="IP is {{ droplet.droplet.ip_address }}"
 
   - name: waiting until ssh is up
-    local_action: wait_for port=22 host={{ inventory_hostname }} search_regex=OpenSSH delay=10
+    local_action: wait_for port=22 host={{ inventory_hostname }} search_regex=OpenSSH delay=5
 
   - name: adding server to the inventory
     add_host:

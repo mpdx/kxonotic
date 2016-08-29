@@ -1,2 +1,10 @@
 --- 
 ansible_ssh_private_key_file: ~/.ssh/xonotic_key
+
+# mail
+mail_host: smtp.gmail.com
+mail_port: 587
+mail_user: "{{ lookup('env', 'EMAIL_USERNAME') }}"
+mail_password: "{{ lookup('env', 'EMAIL_PASSWORD') }}"
+mail_from: "{{ lookup('env', 'EMAIL_FROM') }}"
+mail_to: "{{ lookup('env', 'EMAIL_TO') }}"
